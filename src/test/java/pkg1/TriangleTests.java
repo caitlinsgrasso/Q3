@@ -10,8 +10,9 @@ import org.junit.Test;
 
 public class TriangleTests {
 	
-	Triangle tri1 = new Triangle (3.0, 4.0, 5.0);
-	Triangle tri2 = new Triangle (6.0, 8.0, 10.0);
+	Triangle tri1 = new Triangle(3.0, 4.0, 5.0);
+	Triangle tri2 = new Triangle(6.0, 8.0, 10.0);
+	Triangle tri3 = new Triangle(1.0,1.0,100.0);
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -51,5 +52,10 @@ public class TriangleTests {
 	public void getArea2() {
 		assertTrue(tri2.getArea()==24.0);
 		assertFalse(tri2.getArea()==20.0);
+	}
+	
+	@Test(expected=TriangleException.class)
+	public void getArea() throws TriangleException{
+		assertTrue(tri3.getArea()==0);
 	}
 }

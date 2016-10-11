@@ -1,10 +1,16 @@
 package pkg1;
 
-public class Triangle extends GeometricObject {
+public class Triangle extends GeometricObject{
 
 	private double side1 = 1;
 	private double side2 = 1;
 	private double side3 = 1;
+
+	public Triangle() {
+		this.setSide1(1);
+		this.setSide2(1);
+		this.setSide3(1);
+	}
 
 	public void setSide1(double side1) {
 		this.side1 = side1;
@@ -18,13 +24,7 @@ public class Triangle extends GeometricObject {
 		this.side3 = side3;
 	}
 
-	public Triangle() {
-		this.setSide1(1);
-		this.setSide2(1);
-		this.setSide3(1);
-	}
-
-	public Triangle(double side1, double side2, double side3) {
+	public Triangle(double side1, double side2, double side3){
 		super();
 		this.setSide1(side1);
 		this.setSide2(side2);
@@ -32,14 +32,20 @@ public class Triangle extends GeometricObject {
 	}
 
 	@Override
-	public double getArea() {
+	public double getArea() throws Exception {
 		double s = this.getPerimeter() / 2;
-		return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+		double arg = s * (s - side1) * (s - side2) * (s - side3);
+		if (arg >= 0){
+			throw new TriangleException("This triangle does not exist");
+		}
+		else{
+			return Math.sqrt(arg);
+		}
 	}
 
 	@Override
 	public double getPerimeter() {
-		 return side1 + side2 + side3;
+		return side1 + side2 + side3;
 	}
 
 	public double getSide1() {
@@ -55,7 +61,8 @@ public class Triangle extends GeometricObject {
 	}
 
 	public String toString() {
-		String str = "The side lengths of the triangle are s" + side1 + ", " + side2 + " and " + side3 + ". The area is " + this.getArea() + " and the perimeter is " + this.getPerimeter() + ".";
+		String str = "The side lengths of the triangle are s" + side1 + ", " + side2 + " and " + side3
+				+ ". The area is " + this.getArea() + " and the perimeter is " + this.getPerimeter() + ".";
 		return str;
 	}
 }
